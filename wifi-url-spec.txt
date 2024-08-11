@@ -1,0 +1,63 @@
+via https://www.wi-fi.org/system/files/WPA3%20Specification%20v3.3.pdf
+
+7 WIFI URI
+This section defines the URI representation for Wi-Fi credentials using the "WIFI" URI scheme. The URI can be encoded
+in a QR code to provide a convenient means to provisioning the credentials to devices.
+7.1 URI format
+The URI is defined by [7] and formatted by the WIFI-qr ABNF rule:
+WIFI-qr = “WIFI:” [type “;”] [trdisable “;”] ssid “;” [hidden “;”] [id “;”] [password “;”] [publickey “;”] “;”
+type = “T:” *(unreserved) ; security type
+trdisable = “R:” *(HEXDIG) ; Transition Disable value
+ssid = “S:” *(printable / pct-encoded) ; SSID of the network
+hidden = “H:true” ; when present, indicates a hidden (stealth) SSID is used
+id = “I:” *(printable / pct-encoded) ; UTF-8 encoded password identifier, present if the password
+has an SAE password identifier
+password = “P:” *(printable / pct-encoded) ; password, present for password-based authentication
+public-key = “K:” *PKCHAR ; DER of ASN.1 SubjectPublicKeyInfo in compressed form and encoded in
+“base64” as per [6], present when the network supports SAE-PK, else absent
+printable = %x20-3a / %x3c-7e ; semi-colon excluded
+PKCHAR = ALPHA / DIGIT / %x2b / %x2f / %x3d
+In this version of the specification, the URI supports provisioning of credentials for Wi-Fi networks using password-based
+authentication, and for unauthenticated (open and Wi-Fi Enhanced Open™ [16]) Wi-Fi networks.
+If the "type" is present, its value is set to "WPA" and it indicates password-based authentication is used.
+If the "type" is absent, it indicates an unauthenticated network (open or Wi-Fi Enhanced Open).
+NOTE: This specification does not define usage of the WIFI URI with WEP shared key.
+The value of "trdisable", if present, is set to a hexadecimal representation of the Transition Disable bitmap field (defined in
+Section 8).
+NOTE: "trdisable" allows transition modes to be disabled at initial configuration of a network profile, and therefore provides
+protection against downgrade attack on a first connection (e.g., before a Transition Disable indication is received from an
+AP).
+The values of "ssid", "password", and "id" are, in general, octet strings. Octets that do not correspond to characters in the
+printable set defined in this ABNF rule are percent-encoded.
+NOTE: The semi-colon is excluded from the printable set as defined in this ABNF rule, and therefore is percent-encoded.
+NOTE: When the password is used with WPA2-Personal (including WPA3-Personal Transition Mode), it comprises only
+ASCII-encoded characters. When the password is used with only SAE, it comprises octets with arbitrary values. The SAE
+password identifier is a UTF-8 string.
+Devices parsing this URI shall ignore semicolon separated components that they do not recognize in the WIFI-qr
+instantiation. Ignoring unknown components allows devices to be forward compatible with future extensions to this
+specification
+
+7.3 URI examples
+Some examples of the WIFI URI format are as follows:
+1. WIFI:T:WPA;S:MyNet;P:MyPassword;;
+▪ STA that supports WPA3-Personal might use SAE or PSK (WPA3-Personal Transition Mode)
+▪ STA that does not support WPA3-Personal uses PSK (WPA2-Personal)
+2. WIFI:T:WPA;R:1;S:MyNet;P:MyPassword;;
+▪ STA that supports WPA3-Personal and Transition Disable uses SAE only (WPA3-Personal Only Mode)
+▪ STA that supports WPA3-Personal but not Transition Disable might use SAE or PSK (WPA3-Personal
+Transition Mode)
+▪ STA that does not support WPA3-Personal uses PSK (WPA2-Personal)
+3. WIFI:T:WPA;R:3; S:MyNet;P:a2bc-de3f-ghi4;K:MDkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDIgADURzxmttZoIRIPW
+GoQMV00XHWCAQIhXruVWOz0NjlkIA=;;
+▪ STA that supports SAE-PK (and, therefore, Transition Disable) uses SAE-PK only (WPA3-Personal SAE-PK
+Only Mode)
+▪ STA that supports WPA3-Personal and Transition Disable but not SAE-PK uses SAE without SAE-PK only
+(WPA3-Personal Only Mode)
+▪ STA that supports WPA3-Personal but not Transition Disable or SAE-PK might use SAE or PSK (WPA3-
+Personal Transition Mode)
+▪ STA that does not support WPA3-Personal uses PSK (WPA2-Personal)
+4. WIFI:R:4;S:MyNet;;
+▪ STA that supports Wi-Fi Enhanced Open and Transition Disable uses Wi-Fi Enhanced Open Only Mode
+▪ STA that supports Wi-Fi Enhanced Open but not Transition Disable might use Wi-Fi Enhanced Open or
+legacy open (Wi-Fi Enhanced Open Transition Mode)
+▪ STA that does not support Wi-Fi Enhanced Open uses legacy open
