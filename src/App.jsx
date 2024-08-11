@@ -63,9 +63,7 @@ function App() {
   }
 
   useEffect(() => {
-    QRCode.toCanvas(canvasRef.current, getWifiURI(wifi), {scale: 20}, function (error) {
-      if (error) console.error(error)
-    })
+    QRCode.toCanvas(canvasRef.current, getWifiURI(wifi), {scale: 20, errorCorrectionLevel: 'L'})
   }, [wifi])
 
 
