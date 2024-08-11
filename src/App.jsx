@@ -1,19 +1,26 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, createRef, useState } from 'react'
 import QRCode from 'qrcode'
 import './App.css'
 
 function App() {
   const canvasRef = useRef()
-  const wifi = {
-    ssid: 'Sesc Wifi',
-    securityType: 'nopass',
-    password: '',
-    hidden: false,
-  }
+  const ssidRef = createRef()
+  const passwordRef = createRef()
 
   // https://github.com/zxing/zxing/wiki/Barcode-Contents#wi-fi-network-config-android-ios-11
-  const qrCodeString = `WIFI:S:Sesc Wifi;T:nopass;P:;H:false;;`
+  const [wifi, setWifi] = useState({
+    ssid: '',
+    type: 'WPA',
+    password: '',
+    hidden: false,
+  })
 
+  const handleWifiChange = (event) => {
+    setWifi({
+      ...wifi,
+      [event.target.id]: event.target.value
+    })
+  }
   
   const getWifiURI = ({ type, trdisable, ssid, hidden, id, password, publickey }) => {
     if (typeof ssid === "undefined") {
@@ -34,7 +41,7 @@ function App() {
      string += trdisable ? `R:${trdisable};` : ''
      
      // ssid = “S:” *(printable / pct-encoded) ; SSID of the network
-     string += `S:${ssid}`
+     string += `S:${ssid};`
      
      // hidden = “H:true” ; when present, indicates a hidden (stealth) SSID is used
      string += hidden ? `H:true` : '' // Apparently the spec says this only can show the network is hidden, not that it can show the network is NOT hidden
@@ -56,15 +63,26 @@ function App() {
   }
 
   useEffect(() => {
-    QRCode.toCanvas(canvasRef.current, getWifiURI(wifi), function (error) {
+    QRCode.toCanvas(canvasRef.current, getWifiURI(wifi), {scale: 20}, function (error) {
       if (error) console.error(error)
     })
-  }, [qrCodeString])
+  }, [wifi])
 
 
   return (
     <>
       <h1>QR Code</h1>
+      <form>
+      {/* WIFI-qr = “WIFI:” [type “;”] [trdisable “;”] ssid “;” [hidden “;”] [id “;”] [password “;”] [publickey “;”] “;”    */}
+      <div>
+        <label htmlFor='ssid'>Wifi Name</label>
+        <input type="text" id="ssid" ref={ssidRef} onChange={handleWifiChange}></input>
+      </div>
+      <div>
+        <label htmlFor='password'>Password</label>
+        <input type="text" id="password" ref={passwordRef} onChange={handleWifiChange}></input>
+      </div>
+      </form>
       <canvas id="qr-code" ref={canvasRef}></canvas>
     </>
   )
