@@ -1,7 +1,5 @@
 {
     "image": "mcr.microsoft.com/devcontainers/universal:2",
-    // install dependencies and start app
-    "updateContentCommand": "npm install && npx playwright install && npx playwright install-deps",
     "postAttachCommand": "npm start",
     "customizations": {
       "vscode": {
