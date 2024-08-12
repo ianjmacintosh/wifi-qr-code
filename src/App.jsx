@@ -51,7 +51,7 @@ function App() {
     string += trdisable ? `R:${trdisable};` : "";
 
     // ssid = “S:” *(printable / pct-encoded) ; SSID of the network
-    string += `S:${ssid};`;
+    string += `S:"${ssid}";`;
 
     // hidden = “H:true” ; when present, indicates a hidden (stealth) SSID is used
     string += hidden ? `H:true` : ""; // Apparently the spec says this only can show the network is hidden, not that it can show the network is NOT hidden
