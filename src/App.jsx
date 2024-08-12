@@ -81,29 +81,33 @@ function App() {
 
   return (
     <>
-      <h1>QR Code</h1>
+      <canvas id="qr-code" ref={canvasRef}></canvas>
       <form>
         {/* WIFI-qr = “WIFI:” [type “;”] [trdisable “;”] ssid “;” [hidden “;”] [id “;”] [password “;”] [publickey “;”] “;”    */}
         <div>
-          <label htmlFor="ssid">Wifi Name</label>
-          <input
-            type="text"
-            id="ssid"
-            ref={ssidRef}
-            onChange={handleWifiChange}
-          ></input>
+          <label htmlFor="ssid">
+            Wifi Name
+            <input
+              type="text"
+              id="ssid"
+              ref={ssidRef}
+              onChange={handleWifiChange}
+            >
+            </input>
+          </label>
         </div>
         <div>
-          <label htmlFor="password">Password</label>
-          <input
-            type="text"
-            id="password"
-            ref={passwordRef}
-            onChange={handleWifiChange}
-          ></input>
+          <label htmlFor="password">
+            Password
+            <input
+              type="text"
+              id="password"
+              ref={passwordRef}
+              onChange={handleWifiChange}
+            ></input>
+          </label>
         </div>
       </form>
-      <canvas id="qr-code" ref={canvasRef}></canvas>
     </>
   );
 }
