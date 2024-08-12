@@ -85,25 +85,27 @@ function App() {
       <form>
         {/* WIFI-qr = “WIFI:” [type “;”] [trdisable “;”] ssid “;” [hidden “;”] [id “;”] [password “;”] [publickey “;”] “;”    */}
         <div>
-          <label htmlFor="ssid">
+          <label htmlFor="ssid" className="block text-sm font-medium leading-6 text-gray-900">
             Wifi Name
             <input
               type="text"
               id="ssid"
               ref={ssidRef}
               onChange={handleWifiChange}
+              className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md"
             >
             </input>
           </label>
         </div>
         <div>
-          <label htmlFor="password">
+          <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
             Password
             <input
               type="text"
               id="password"
               ref={passwordRef}
               onChange={handleWifiChange}
+              className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md"
             ></input>
           </label>
         </div>
