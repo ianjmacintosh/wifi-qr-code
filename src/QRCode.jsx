@@ -5,7 +5,7 @@ const QRCode = ({ data }) => {
   const canvasRef = React.useRef();
   React.useEffect(() => {
     toCanvas(canvasRef.current, data, {
-      scale: 20,
+      width: 640,
       errorCorrectionLevel: "L",
     });
   }, [data]);
