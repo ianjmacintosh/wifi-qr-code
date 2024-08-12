@@ -1,6 +1,6 @@
 import { useRef, useEffect, createRef, useState } from "react";
 import QRCode from "qrcode";
-import "./App.css";
+import "./output.css";
 
 function App() {
   const canvasRef = useRef();
