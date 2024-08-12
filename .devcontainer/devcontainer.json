@@ -1,5 +1,5 @@
 {
-    "postAttachCommand": "npm start",
+    "postAttachCommand": "npm run dev",
     "customizations": {
       "vscode": {
         "settings": {
