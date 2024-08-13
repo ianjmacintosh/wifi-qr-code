@@ -24,35 +24,37 @@ function App() {
   };
 
   return (
-    <>
-      <QRCode data={wifiString}></QRCode>
-
+    <div className="container mx-auto flex flex-col place-content-center">
+      <div className="flex m-auto w-8/12 place-content-center">
+        <QRCode data={wifiString}></QRCode>
+      </div>
       <form>
         {/* WIFI-qr = “WIFI:” [type “;”] [trdisable “;”] ssid “;” [hidden “;”] [id “;”] [password “;”] [publickey “;”] “;”    */}
-        <div>
-          <label htmlFor="ssid">
-            Wifi Name
+        <div className="space-y-3 m-auto w-8/12">
+          <div className="flex flex-col space-y-2">
+            <label htmlFor="ssid">Wifi Name</label>
             <input
               type="text"
               id="ssid"
               ref={ssidRef}
               onChange={handleWifiChange}
+              className="border-2"
             ></input>
-          </label>
-        </div>
-        <div>
-          <label htmlFor="password">
-            Password
+          </div>
+          <div className="flex flex-col space-y-2">
+            <label htmlFor="password">Password</label>
+
             <input
               type="text"
               id="password"
               ref={passwordRef}
               onChange={handleWifiChange}
+              className="border-2"
             ></input>
-          </label>
+          </div>
         </div>
       </form>
-    </>
+    </div>
   );
 }
 
