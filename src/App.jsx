@@ -32,24 +32,28 @@ function App() {
         {/* WIFI-qr = “WIFI:” [type “;”] [trdisable “;”] ssid “;” [hidden “;”] [id “;”] [password “;”] [publickey “;”] “;”    */}
         <div className="space-y-3 m-auto w-8/12">
           <div className="flex flex-col space-y-2">
-            <label htmlFor="ssid">Wifi Name</label>
+            <label htmlFor="ssid" className="text-lg font-bold">
+              Wi-Fi Name
+            </label>
             <input
               type="text"
               id="ssid"
               ref={ssidRef}
               onChange={handleWifiChange}
-              className="border-2"
+              className="border-2 text-5xl p-6"
             ></input>
           </div>
           <div className="flex flex-col space-y-2">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password" className="text-lg font-bold">
+              Password
+            </label>
 
             <input
               type="text"
               id="password"
               ref={passwordRef}
               onChange={handleWifiChange}
-              className="border-2"
+              className="border-2 text-5xl p-6"
             ></input>
           </div>
         </div>
