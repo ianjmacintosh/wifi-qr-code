@@ -17,6 +17,10 @@ export const getWifiURI = ({
       WIFI-qr = “WIFI:” [type “;”] [trdisable “;”] ssid “;” [hidden “;”] [id “;”] [password “;”] [publickey “;”] “;”      
       */
 
+  if (password === "") {
+    type = "nopass";
+  }
+
   // Let's get it
   let string = "WIFI:";
 
