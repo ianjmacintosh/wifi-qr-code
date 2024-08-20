@@ -38,7 +38,7 @@ test("updates the QR code when I add a password", async ({ page }) => {
   );
 });
 
-test.only("creates the Google Analytics `gtag` object", async ({ page }) => {
+test("creates the Google Analytics `gtag` object", async ({ page }) => {
   await page.goto("/");
 
   const gtagType = await page.evaluate("typeof gtag");
