@@ -6,7 +6,7 @@ test("has QR code, Wi-Fi Name field, and Password field", async ({ page }) => {
 
   // Expect page to show:
   // * QR code
-  await expect(page.getByLabel(/^QR Code for/)).toBeVisible();
+  await expect(page.getByRole("img")).toBeVisible(); // If it's an image, it's a QR Code?? What are we DOING??
   // * Wi-Fi field
   await expect(page.getByLabel("Wi-Fi Name")).toBeVisible();
   // * Password field
@@ -24,7 +24,7 @@ test("updates the QR code when I change the Wi-Fi name, uses 'nopass' auth when 
   // TODO: Test the QR Code's actual content
   await expect(page.getByRole("img")).toHaveAttribute(
     "aria-label",
-    `QR Code for "WIFI:T:nopass;S:"Testing";;" (without the wrapping quotes)`, // I'm using backticks here to avoid needing to escape doublequote chars
+    `WIFI:T:nopass;S:"Testing";;`, // I'm using backticks here to avoid needing to escape doublequote chars
   );
 });
 
@@ -38,6 +38,6 @@ test("updates the QR code when I add a password", async ({ page }) => {
   // TODO: Test the QR Code's actual content
   await expect(page.getByRole("img")).toHaveAttribute(
     "aria-label",
-    `QR Code for "WIFI:T:WPA;S:"Testing";P:HelloWorld;;" (without the wrapping quotes)`, // I'm using backticks here to avoid needing to escape doublequote chars
+    `WIFI:T:WPA;S:"Testing";P:HelloWorld;;`, // I'm using backticks here to avoid needing to escape doublequote chars
   );
 });

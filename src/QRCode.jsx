@@ -9,7 +9,7 @@ const QRCode = ({ data }) => {
       errorCorrectionLevel: "L",
     });
   }, [data]);
-  return <canvas id="qr-code" ref={canvasRef} role="img" aria-label={`QR Code for "${data}" (without the wrapping quotes)`}></canvas>;
+  return <canvas id="qr-code" ref={canvasRef} role="img" aria-label={data}></canvas>;
 };
 
 export default QRCode;
