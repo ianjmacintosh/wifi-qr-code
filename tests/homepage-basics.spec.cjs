@@ -11,5 +11,7 @@ test("has QR code, Wi-Fi Name field, and Password field", async ({ page }) => {
   // * QR code
   await expect(page.getByLabel(/^QR Code for/)).toBeVisible();
   // * Wi-Fi field
+  await expect(page.getByLabel("Wi-Fi Name")).toBeVisible();
   // * Password field
+  await expect(page.getByLabel("Password")).toBeVisible();
 });
