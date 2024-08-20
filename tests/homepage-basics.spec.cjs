@@ -37,3 +37,11 @@ test("updates the QR code when I add a password", async ({ page }) => {
     `WIFI:T:WPA;S:"Testing";P:HelloWorld;;`, // I'm using backticks here to avoid needing to escape doublequote chars
   );
 });
+
+test("creates the Google Analytics `gtag` object", async ({ page }) => {
+  await page.goto("/");
+
+  const gtagType = await page.evaluate("typeof gtag");
+
+  await expect(gtagType).toEqual("function");
+});
