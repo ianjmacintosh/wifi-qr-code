@@ -45,3 +45,20 @@ test("creates the Google Analytics `gtag` object", async ({ page }) => {
 
   await expect(gtagType).toEqual("function");
 });
+
+test("downloads an image when clicking the download button", async ({
+  page,
+}) => {
+  await page.goto("/");
+
+  await page.getByLabel("Wi-Fi Name").fill("Testing");
+
+  const downloadPromise = page.waitForEvent("download");
+
+  // Click download button
+  await page.getByText("Download").click();
+  const download = await downloadPromise;
+
+  // Confirm something downloads
+  expect(download.suggestedFilename()).toBe("Testing-qr-code.png");
+});
