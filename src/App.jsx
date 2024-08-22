@@ -16,6 +16,8 @@ function App() {
   });
   const wifiString = getWifiURI(wifi);
 
+  const canvasRef = useRef();
+
   const handleWifiChange = (event) => {
     setWifi({
       ...wifi,
@@ -23,11 +25,14 @@ function App() {
     });
   };
 
+  const downloadQrCode = (canvasEl) => {
+    console.log(`Finna download ${canvasEl}`);
+  };
+
   return (
     <div className="container mx-auto flex flex-col space-y-6 w-9/12">
       <form className="space-y-3">
         {/* WIFI-qr = “WIFI:” [type “;”] [trdisable “;”] ssid “;” [hidden “;”] [id “;”] [password “;”] [publickey “;”] “;”    */}
-
         <div className="flex flex-col space-y-2">
           <label htmlFor="ssid" className="text-lg font-bold">
             Wi-Fi Name
@@ -55,11 +60,15 @@ function App() {
         <div className="flex flex-col space-y-2">
           <label className="text-lg font-bold">QR Code</label>
           <div className="w-12/12">
-            <QRCode data={wifiString} options={{ width: 720 }}></QRCode>
+            <QRCode
+              data={wifiString}
+              options={{ width: 720 }}
+              ref={canvasRef}
+            ></QRCode>
           </div>
         </div>
         <div className="flex flex-col space-y-2">
-          <button className="border-2 w-1/12 bg-white">
+          <button className="border-2 w-1/12 bg-white" onClick={downloadQrCode}>
             Download
             <svg
               xmlns="http://www.w3.org/2000/svg"
