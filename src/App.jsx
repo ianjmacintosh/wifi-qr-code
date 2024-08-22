@@ -25,8 +25,16 @@ function App() {
     });
   };
 
-  const downloadQrCode = (canvasEl) => {
-    console.log(`Finna download ${canvasEl}`);
+  const downloadCanvas = (canvasEl, filename = "canvas.png") => {
+    canvasEl.toBlob((blob) => {
+      const anchor = document.createElement("a");
+      anchor.download = filename;
+      anchor.href = URL.createObjectURL(blob);
+
+      anchor.click();
+
+      URL.revokeObjectURL(anchor.href);
+    });
   };
 
   return (
@@ -68,7 +76,16 @@ function App() {
           </div>
         </div>
         <div className="flex flex-col space-y-2">
-          <button className="border-2 w-1/12 bg-white" onClick={downloadQrCode}>
+          <button
+            className="border-2 w-1/12 bg-white"
+            onClick={(e) => {
+              e.preventDefault();
+              downloadCanvas(
+                canvasRef.current,
+                `${wifi.ssid ? wifi.ssid : "wifi"}-qr-code.png`,
+              );
+            }}
+          >
             Download
             <svg
               xmlns="http://www.w3.org/2000/svg"
