@@ -18,7 +18,7 @@ test("updates the QR code when I change the Wi-Fi name, uses 'nopass' auth when 
   await page.getByLabel("Wi-Fi Name").fill("Testing");
 
   // TODO: Test the QR Code's actual content
-  await expect(page.getByRole("img")).toHaveAttribute(
+  await expect(page.getByLabel("QR Code")).toHaveAttribute(
     "aria-description",
     `WIFI:T:nopass;S:"Testing";;`, // I'm using backticks here to avoid needing to escape doublequote chars
   );
@@ -32,7 +32,7 @@ test("updates the QR code when I add a password", async ({ page }) => {
   await page.getByLabel("Password").fill("HelloWorld");
 
   // TODO: Test the QR Code's actual content
-  await expect(page.getByRole("img")).toHaveAttribute(
+  await expect(page.getByLabel("QR Code")).toHaveAttribute(
     "aria-description",
     `WIFI:T:WPA;S:"Testing";P:HelloWorld;;`, // I'm using backticks here to avoid needing to escape doublequote chars
   );
