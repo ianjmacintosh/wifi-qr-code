@@ -24,38 +24,51 @@ function App() {
   };
 
   return (
-    <div className="container mx-auto flex flex-col place-content-center space-y-6">
-      <div className="flex m-auto w-8/12 place-content-center">
-        <QRCode data={wifiString}></QRCode>
-      </div>
-      <form>
+    <div className="container mx-auto flex flex-col space-y-6 w-9/12">
+      <form className="space-y-3">
         {/* WIFI-qr = “WIFI:” [type “;”] [trdisable “;”] ssid “;” [hidden “;”] [id “;”] [password “;”] [publickey “;”] “;”    */}
-        <div className="space-y-3 m-auto w-9/12">
-          <div className="flex flex-col space-y-2">
-            <label htmlFor="ssid" className="text-lg font-bold">
-              Wi-Fi Name
-            </label>
-            <input
-              type="text"
-              id="ssid"
-              ref={ssidRef}
-              onChange={handleWifiChange}
-              className="border-2 text-xl p-3 lg:text-5xl lg:p-6"
-            ></input>
-          </div>
-          <div className="flex flex-col space-y-2">
-            <label htmlFor="password" className="text-lg font-bold">
-              Password
-            </label>
 
-            <input
-              type="text"
-              id="password"
-              ref={passwordRef}
-              onChange={handleWifiChange}
-              className="border-2 text-xl p-3 lg:text-5xl lg:p-6"
-            ></input>
+        <div className="flex flex-col space-y-2">
+          <label htmlFor="ssid" className="text-lg font-bold">
+            Wi-Fi Name
+          </label>
+          <input
+            type="text"
+            id="ssid"
+            ref={ssidRef}
+            onChange={handleWifiChange}
+            className="border-2 text-xl p-3 lg:text-5xl lg:p-6"
+          ></input>
+        </div>
+        <div className="flex flex-col space-y-2">
+          <label htmlFor="password" className="text-lg font-bold">
+            Password
+          </label>
+          <input
+            type="text"
+            id="password"
+            ref={passwordRef}
+            onChange={handleWifiChange}
+            className="border-2 text-xl p-3 lg:text-5xl lg:p-6"
+          ></input>
+        </div>
+        <div className="flex flex-col space-y-2">
+          <label className="text-lg font-bold">QR Code</label>
+          <div className="w-12/12">
+            <QRCode data={wifiString} options={{ width: 720 }}></QRCode>
           </div>
+        </div>
+        <div className="flex flex-col space-y-2">
+          <button className="border-2 w-1/12 bg-white">
+            Download
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path d="M13 10H18L12 16L6 10H11V3H13V10ZM4 19H20V12H22V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V12H4V19Z"></path>
+            </svg>
+          </button>
         </div>
       </form>
     </div>
