@@ -18,7 +18,7 @@ test("updates the QR code when I change the Wi-Fi name, uses 'nopass' auth when 
   await page.getByLabel("Wi-Fi Name").fill("Testing");
 
   // TODO: Test the QR Code's actual content
-  await expect(page.getByRole("img")).toHaveAttribute(
+  await expect(page.getByLabel("QR Code")).toHaveAttribute(
     "aria-description",
     `WIFI:T:nopass;S:"Testing";;`, // I'm using backticks here to avoid needing to escape doublequote chars
   );
@@ -32,7 +32,7 @@ test("updates the QR code when I add a password", async ({ page }) => {
   await page.getByLabel("Password").fill("HelloWorld");
 
   // TODO: Test the QR Code's actual content
-  await expect(page.getByRole("img")).toHaveAttribute(
+  await expect(page.getByLabel("QR Code")).toHaveAttribute(
     "aria-description",
     `WIFI:T:WPA;S:"Testing";P:HelloWorld;;`, // I'm using backticks here to avoid needing to escape doublequote chars
   );
@@ -44,4 +44,21 @@ test("creates the Google Analytics `gtag` object", async ({ page }) => {
   const gtagType = await page.evaluate("typeof gtag");
 
   await expect(gtagType).toEqual("function");
+});
+
+test("downloads an image when clicking the download button", async ({
+  page,
+}) => {
+  await page.goto("/");
+
+  await page.getByLabel("Wi-Fi Name").fill("Testing");
+
+  const downloadPromise = page.waitForEvent("download");
+
+  // Click download button
+  await page.getByText("Save Image").click();
+  const download = await downloadPromise;
+
+  // Confirm something downloads
+  expect(download.suggestedFilename()).toBe("Testing-qr-code.png");
 });

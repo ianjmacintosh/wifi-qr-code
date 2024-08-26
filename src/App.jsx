@@ -1,7 +1,6 @@
 import { useRef, useEffect, createRef, useState } from "react";
 import QRCode from "./QRCode";
 import { getWifiURI } from "./utils";
-import "./output.css";
 
 function App() {
   const ssidRef = createRef();
@@ -16,6 +15,8 @@ function App() {
   });
   const wifiString = getWifiURI(wifi);
 
+  const canvasRef = useRef();
+
   const handleWifiChange = (event) => {
     setWifi({
       ...wifi,
@@ -23,16 +24,42 @@ function App() {
     });
   };
 
+  const downloadCanvas = (canvasEl, filename = "canvas.png") => {
+    canvasEl.toBlob((blob) => {
+      const anchor = document.createElement("a");
+      anchor.download = filename;
+      anchor.href = URL.createObjectURL(blob);
+
+      anchor.click();
+
+      URL.revokeObjectURL(anchor.href);
+    });
+  };
+
   return (
-    <div className="container mx-auto flex flex-col place-content-center space-y-6">
-      <div className="flex m-auto w-8/12 place-content-center">
-        <QRCode data={wifiString}></QRCode>
-      </div>
-      <form>
-        {/* WIFI-qr = “WIFI:” [type “;”] [trdisable “;”] ssid “;” [hidden “;”] [id “;”] [password “;”] [publickey “;”] “;”    */}
-        <div className="space-y-3 m-auto w-9/12">
-          <div className="flex flex-col space-y-2">
-            <label htmlFor="ssid" className="text-lg font-bold">
+    <div className="container mx-auto p-4">
+      <div className="flex flex-col lg:flex-row gap-4">
+        {" "}
+        {/* Outer wrapper to center content */}
+        <form className="flex flex-col gap-4 grow">
+          <div className="space-y-4">
+            <h1 className="text-4xl font-bold">What's the Wifi Password?</h1>
+            <p>Sick of telling people the wifi info?</p>
+            <p>
+              Enter your network details to get a QR code anyone can scan with
+              their phone to get on the wifi
+            </p>
+            <p>
+              Print it out (or take a screenshot) and show it to anyone who
+              wants to connect
+            </p>
+          </div>
+          <div>
+            {/* https://www.hyperui.dev/components/application-ui/login-forms */}
+            <label
+              htmlFor="ssid"
+              className="block text-sm font-bold text-gray-700 mb-2"
+            >
               Wi-Fi Name
             </label>
             <input
@@ -40,24 +67,84 @@ function App() {
               id="ssid"
               ref={ssidRef}
               onChange={handleWifiChange}
-              className="border-2 text-xl p-3 lg:text-5xl lg:p-6"
-            ></input>
+              className="w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+            />
           </div>
-          <div className="flex flex-col space-y-2">
-            <label htmlFor="password" className="text-lg font-bold">
+          <div>
+            <label
+              htmlFor="password"
+              className="block text-sm font-bold text-gray-700 mb-2"
+            >
               Password
             </label>
-
             <input
               type="text"
               id="password"
               ref={passwordRef}
               onChange={handleWifiChange}
-              className="border-2 text-xl p-3 lg:text-5xl lg:p-6"
-            ></input>
+              className="w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+            />
+          </div>
+        </form>
+        <div>
+          {/* I don't control this width with TailwindCSS -- it's just 320px wide */}
+          <div>
+            <label className="block text-sm font-bold text-gray-700 mb-2">
+              QR Code
+            </label>
+
+            <div className="flex justify-center border rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm mb-2">
+              <QRCode
+                data={wifiString}
+                options={{ width: 320 }}
+                ref={canvasRef}
+              ></QRCode>
+            </div>
+          </div>
+          <div>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                downloadCanvas(
+                  canvasRef.current,
+                  `${wifi.ssid ? wifi.ssid : "wifi"}-qr-code.png`,
+                );
+              }}
+              className="w-full
+              text-white
+              bg-blue-700
+              hover:bg-blue-800
+              focus:ring-4
+              focus:outline-none
+              focus:ring-blue-300
+              font-medium
+              rounded-lg
+              text-sm
+              px-5
+              py-2.5
+              inline-flex
+              items-center
+              justify-center
+              dark:bg-blue-600
+              dark:hover:bg-blue-700
+              dark:focus:ring-blue-800"
+            >
+              {/* https://remixicon.com/ */}
+              <svg
+                className="w-3.5 h-3.5 me-2"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M13 10H18L12 16L6 10H11V3H13V10ZM4 19H20V12H22V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V12H4V19Z"></path>
+              </svg>
+              Save Image as PNG...
+            </button>
           </div>
         </div>
-      </form>
+      </div>
     </div>
   );
 }
