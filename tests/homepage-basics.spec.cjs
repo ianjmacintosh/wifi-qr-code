@@ -56,7 +56,7 @@ test("downloads an image when clicking the download button", async ({
   const downloadPromise = page.waitForEvent("download");
 
   // Click download button
-  await page.getByText("Download").click();
+  await page.getByText("Save Image").click();
   const download = await downloadPromise;
 
   // Confirm something downloads
