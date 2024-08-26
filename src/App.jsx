@@ -1,7 +1,6 @@
 import { useRef, useEffect, createRef, useState } from "react";
 import QRCode from "./QRCode";
 import { getWifiURI } from "./utils";
-import "./output.css";
 
 function App() {
   const ssidRef = createRef();
