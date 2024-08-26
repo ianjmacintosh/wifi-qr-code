@@ -38,11 +38,11 @@ function App() {
 
   return (
     <div className="container mx-auto p-4">
-      <div className="flex flex-col lg:flex-row">
+      <div className="flex flex-col lg:flex-row gap-4">
         {" "}
         {/* Outer wrapper to center content */}
-        <form className="flex flex-col gap-4 mb-4">
-          <div className="w-full">
+        <form className="flex flex-col gap-4 grow">
+          <div>
             {/* https://www.hyperui.dev/components/application-ui/login-forms */}
             <label
               htmlFor="ssid"
@@ -58,7 +58,7 @@ function App() {
               className="w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
             />
           </div>
-          <div className="w-full">
+          <div>
             <label
               htmlFor="password"
               className="block text-sm font-bold text-gray-700 mb-2"
