@@ -37,13 +37,13 @@ function App() {
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 font-industrial">
       <div className="flex flex-col lg:flex-row gap-4">
         {" "}
         {/* Outer wrapper to center content */}
         <form className="flex flex-col gap-4 grow">
           <div className="space-y-4">
-            <h1 className="text-4xl font-bold">What's the Wifi Password?</h1>
+            <h1 className="text-5xl font-bold">What's the Wifi Password?</h1>
             <p>Sick of telling people the wifi info?</p>
             <p>
               Enter your network details to get a QR code anyone can scan with
