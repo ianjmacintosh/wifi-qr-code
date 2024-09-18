@@ -37,20 +37,20 @@ function App() {
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 font-monocode">
       <div className="flex flex-col lg:flex-row gap-4">
         {" "}
         {/* Outer wrapper to center content */}
         <form className="flex flex-col gap-4 grow">
-          <div className="space-y-4">
-            <h1 className="text-4xl font-bold">What's the Wifi Password?</h1>
+          <div className="space-y-4 text-lg">
+            <h1 className="text-5xl font-classhuman font-bold">What's the Wifi Password?</h1>
             <p>Sick of telling people the wifi info?</p>
             <p>
               Enter your network details to get a QR code anyone can scan with
               their phone to get on the wifi
             </p>
             <p>
-              Print it out (or take a screenshot) and show it to anyone who
+              Print it out (or take a screenshot) and show it to whoever
               wants to connect
             </p>
           </div>
@@ -58,7 +58,7 @@ function App() {
             {/* https://www.hyperui.dev/components/application-ui/login-forms */}
             <label
               htmlFor="ssid"
-              className="block text-sm font-bold text-gray-700 mb-2"
+              className="block text-base uppercase font-bold text-gray-700 mb-2"
             >
               Wi-Fi Name
             </label>
@@ -67,13 +67,13 @@ function App() {
               id="ssid"
               ref={ssidRef}
               onChange={handleWifiChange}
-              className="w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+              className="w-full rounded-md border-gray-200 bg-white text-lg text-gray-700 shadow-sm"
             />
           </div>
           <div>
             <label
               htmlFor="password"
-              className="block text-sm font-bold text-gray-700 mb-2"
+              className="block text-base uppercase font-bold text-gray-700 mb-2"
             >
               Password
             </label>
@@ -82,14 +82,14 @@ function App() {
               id="password"
               ref={passwordRef}
               onChange={handleWifiChange}
-              className="w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+              className="w-full rounded-md border-gray-200 bg-white text-lg text-gray-700 shadow-sm"
             />
           </div>
         </form>
         <div>
           {/* I don't control this width with TailwindCSS -- it's just 320px wide */}
           <div>
-            <label className="block text-sm font-bold text-gray-700 mb-2">
+            <label className="block text-base uppercase font-bold text-gray-700 mb-2">
               QR Code
             </label>
 
@@ -120,7 +120,7 @@ function App() {
               focus:ring-blue-300
               font-medium
               rounded-lg
-              text-sm
+              text-lg
               px-5
               py-2.5
               inline-flex
@@ -132,7 +132,7 @@ function App() {
             >
               {/* https://remixicon.com/ */}
               <svg
-                className="w-3.5 h-3.5 me-2"
+                className="w-5 h-5 me-2"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"
