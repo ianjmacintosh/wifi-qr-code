@@ -67,7 +67,7 @@ function App() {
               id="ssid"
               ref={ssidRef}
               onChange={handleWifiChange}
-              className="w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+              className="w-full rounded-md border-gray-200 bg-white text-lg text-gray-700 shadow-sm"
             />
           </div>
           <div>
@@ -82,7 +82,7 @@ function App() {
               id="password"
               ref={passwordRef}
               onChange={handleWifiChange}
-              className="w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+              className="w-full rounded-md border-gray-200 bg-white text-lg text-gray-700 shadow-sm"
             />
           </div>
         </form>
