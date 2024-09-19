@@ -37,7 +37,7 @@ function App() {
   };
 
   return (
-    <div className="container mx-auto p-4 font-monocode text-lg grid grid-cols-12">
+    <div className="container mx-auto p-4 font-monocode text-lg grid grid-cols-12 space-y-6">
       <div className="lg:col-start-3 lg:col-end-11 col-span-12 gap-4 space-y-6">
         <h1 className="text-5xl font-classhuman font-bold">
           What's the Wifi Password?
@@ -53,7 +53,7 @@ function App() {
         </p>
       </div>
 
-      <form className="border border-gray-400 rounded-md bg-white col-span-12 gap-4 grow p-6 space-y-6">
+      <form className="border border-gray-400 rounded-xl bg-white col-span-12 gap-4 grow space-y-6 p-6 space-y-6">
         <div>
           {/* https://www.hyperui.dev/components/application-ui/login-forms */}
           <label
@@ -67,7 +67,7 @@ function App() {
             id="ssid"
             ref={ssidRef}
             onChange={handleWifiChange}
-            className="w-full rounded-md border border-gray-200 bg-slate-50 text-lg text-gray-700"
+            className="w-full rounded-md border border-gray-300 text-lg text-gray-700"
           />
         </div>
         <div>
@@ -82,25 +82,23 @@ function App() {
             id="password"
             ref={passwordRef}
             onChange={handleWifiChange}
-            className="w-full rounded-md border border-gray-200 bg-slate-50 text-lg text-gray-700"
+            className="w-full rounded-md border border-gray-300 text-lg text-gray-700"
           />
         </div>
         <div>
           {/* I don't control this width with TailwindCSS -- it's just 320px wide */}
-          <div>
-            <label className="block text-base uppercase font-bold text-gray-700 mb-2">
-              QR Code
-            </label>
+          <label className="block text-base uppercase font-bold text-gray-700 mb-2">
+            QR Code
+          </label>
 
-            <div className="flex justify-center border rounded-md bg-white text-sm text-gray-700 shadow-sm mb-2">
+          <div className="flex flex-col items-center justify-items-center space-y-6">
+            <div className="border border-gray-300 rounded-md bg-white ">
               <QRCode
                 data={wifiString}
-                options={{ width: 320 }}
+                options={{ width: 300 }}
                 ref={canvasRef}
               ></QRCode>
             </div>
-          </div>
-          <div>
             <button
               type="button"
               onClick={(e) => {
@@ -114,9 +112,9 @@ function App() {
               text-white
               bg-blue-700
               hover:bg-blue-800
-              focus:ring-4
+              focus:ring
               focus:outline-none
-              focus:ring-blue-300
+              focus:ring-gray-300
               font-medium
               rounded-lg
               text-lg
@@ -124,10 +122,7 @@ function App() {
               py-2.5
               inline-flex
               items-center
-              justify-center
-              dark:bg-blue-600
-              dark:hover:bg-blue-700
-              dark:focus:ring-blue-800"
+              justify-center"
             >
               {/* https://remixicon.com/ */}
               <svg
