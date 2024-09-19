@@ -37,15 +37,15 @@ function App() {
   };
 
   return (
-    <div className="container mx-auto p-6 font-monocode text-lg grid grid-cols-12 space-y-6">
-      <div className="lg:col-start-3 lg:col-end-11 col-span-12 gap-4 space-y-6">
-        <h1 className="text-5xl font-classhuman font-bold">
+    <div className="container mx-auto p-6 font-monocode text-lg space-y-6 flex flex-col items-center">
+      <div className="space-y-6">
+        <h1 className="text-5xl font-classhuman font-bold text-center">
           What's the Wifi Password?
         </h1>
         <p>Sick of telling people the wifi info?</p>
         <p>
-          Enter your network details to get a QR code anyone can scan with their
-          phone to get on the wifi
+          Enter your network details to make a QR code anyone can scan to get on
+          the wifi
         </p>
         <p>
           Print it out (or take a screenshot) and show it to whoever wants to
@@ -53,12 +53,12 @@ function App() {
         </p>
       </div>
 
-      <form className="border border-gray-400 rounded-xl bg-white col-span-12 gap-4 grow space-y-6 p-6 lg:col-start-5 lg:col-end-9">
+      <form className="border border-gray-200 rounded-xl bg-white space-y-6 p-6 md:w-1/2 lg:w-1/3">
         <div>
           {/* https://www.hyperui.dev/components/application-ui/login-forms */}
           <label
             htmlFor="ssid"
-            className="block col-span-12 text-base uppercase font-bold text-gray-700 mb-2"
+            className="block text-base uppercase font-bold text-gray-700 mb-2"
           >
             Wi-Fi Name
           </label>
@@ -91,8 +91,8 @@ function App() {
             QR Code
           </label>
 
-          <div className="flex flex-col items-center justify-items-center space-y-6">
-            <div className="border border-gray-300 rounded-md bg-white w-full flex flex-col items-center">
+          <div className="space-y-6">
+            <div className="border border-gray-300 rounded-md bg-white w-full flex flex-col items-center ">
               <QRCode
                 data={wifiString}
                 options={{ width: 200 }}
