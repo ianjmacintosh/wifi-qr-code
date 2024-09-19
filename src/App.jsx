@@ -37,7 +37,7 @@ function App() {
   };
 
   return (
-    <div className="container mx-auto p-4 font-monocode text-lg grid grid-cols-12 space-y-6">
+    <div className="container mx-auto p-6 font-monocode text-lg grid grid-cols-12 space-y-6">
       <div className="lg:col-start-3 lg:col-end-11 col-span-12 gap-4 space-y-6">
         <h1 className="text-5xl font-classhuman font-bold">
           What's the Wifi Password?
@@ -53,7 +53,7 @@ function App() {
         </p>
       </div>
 
-      <form className="border border-gray-400 rounded-xl bg-white col-span-12 gap-4 grow space-y-6 p-6 space-y-6">
+      <form className="border border-gray-400 rounded-xl bg-white col-span-12 gap-4 grow space-y-6 p-6 lg:col-start-5 lg:col-end-9">
         <div>
           {/* https://www.hyperui.dev/components/application-ui/login-forms */}
           <label
@@ -92,10 +92,10 @@ function App() {
           </label>
 
           <div className="flex flex-col items-center justify-items-center space-y-6">
-            <div className="border border-gray-300 rounded-md bg-white ">
+            <div className="border border-gray-300 rounded-md bg-white w-full flex flex-col items-center">
               <QRCode
                 data={wifiString}
-                options={{ width: 300 }}
+                options={{ width: 200 }}
                 ref={canvasRef}
               ></QRCode>
             </div>
