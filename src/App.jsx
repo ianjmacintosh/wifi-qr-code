@@ -42,7 +42,6 @@ function App() {
         <h1 className="text-5xl font-classhuman font-bold text-center">
           What's the Wifi Password?
         </h1>
-        <p>Sick of telling people the wifi info?</p>
         <p>
           Enter your network details to make a QR code anyone can scan to get on
           the wifi
