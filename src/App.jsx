@@ -53,7 +53,7 @@ function App() {
         </p>
       </div>
 
-      <form className="border border-gray-200 rounded-xl bg-white space-y-6 p-6 md:w-1/2 lg:w-1/3">
+      <form className="border border-gray-200 rounded-xl bg-white space-y-6 p-6 w-full md:w-1/2 lg:w-1/3">
         <div>
           {/* https://www.hyperui.dev/components/application-ui/login-forms */}
           <label
